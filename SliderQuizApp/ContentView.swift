@@ -12,23 +12,19 @@ struct ContentView: View {
     @State var currentValue: Double = 50
     @State var isPresented: Bool = false
     
-    private var result: Int {
-        computeScore()
-    }
-    
     var body: some View {
         VStack(spacing: 50) {
             Text("Подвинь слайдер, как можно ближе к: \(targetValue)")
             
             HStack {
                 Text("0")
-                UIKitSlider(currentValue: $currentValue, alpha: result)
+                UIKitSlider(currentValue: $currentValue, alpha: computeScore())
                 Text("100")
             }
             
             Button("Проверь меня!", action: { isPresented.toggle() })
                 .alert("Your score", isPresented: $isPresented, actions: {}) {
-                    Text("\(result)")
+                    Text("\(computeScore())")
                 }
             
             Button("Начать заново") {
